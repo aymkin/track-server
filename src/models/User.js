@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const userScheme = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   email: {
     type: String,
     unique: true,
@@ -13,7 +13,7 @@ const userScheme = new mongoose.Schema({
   },
 })
 
-userScheme.pre('save', function() {
+userSchema.pre('save', function(next) {
   const user = this
   if (!user.isModified('password')) {
     return next()
@@ -35,7 +35,7 @@ userScheme.pre('save', function() {
   })
 })
 
-userScheme.methods.comparePassword = function(candidatePassword) {
+userSchema.methods.comparePassword = function(candidatePassword) {
   const user = this
 
   return new Promise((resolve, reject) => {
@@ -53,4 +53,4 @@ userScheme.methods.comparePassword = function(candidatePassword) {
   })
 }
 
-mongoose.model('User', userScheme)
+mongoose.model('User', userSchema)
