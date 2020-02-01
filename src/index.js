@@ -1,8 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const authRoutes = require('./routes/authRoutes')
 const mongodb = require('../mongodbSensitive')
 
 const app = express()
+
+app.use(express.json())
+app.use(authRoutes)
 
 const mongoUri = mongodb.uri
 mongoose.connect(mongoUri, {
