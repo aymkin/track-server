@@ -6,15 +6,15 @@ const mongodb = require('../../mongodbSensitive')
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers
-  // aauthorization === 'Bearer adfasdfasdfadasdf'
+  // authorization === 'Bearer adfasdfasdfadasdf'
   if (!authorization) {
-    return res.status(401).send({error: 'You must me logged in'})
+    return res.status(401).send({ error: 'You must me logged in' })
   }
 
   const token = authorization.replace('Bearer ', '')
   jwt.verify(token, mongodb.jwtSecretKey, async (error, payload) => {
     if (error) {
-      return res.status(401).send({error: 'You must me logged in'})
+      return res.status(401).send({ error: 'You must me logged in' })
     }
 
     const { userId } = payload
