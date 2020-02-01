@@ -12,21 +12,21 @@ app.use(authRoutes)
 
 const mongoUri = mongodb.uri
 mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
 })
 mongoose.connection.on('connected', () => {
-    console.log('Connected to mongo instance...')
+  console.log('Connected to mongo instance...')
 })
 mongoose.connection.on('error', err => {
-    console.log('Error connecting to mono: ' + err)
+  console.log('Error connecting to mono: ' + err)
 })
 
 app.get('/', (req, res) => {
-    res.send('Hello express')
+  res.send('Hello express')
 })
 
 app.listen(3000, () => {
-    console.log('Server running on port 3000')
+  console.log('Server running on port 3000')
 })
