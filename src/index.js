@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/authRoutes')
 const mongodb = require('../mongodbSensitive')
+const requireAuth = require('./middlewares/requireAuth')
 
 const app = express()
 
@@ -23,8 +24,8 @@ mongoose.connection.on('error', err => {
   console.log('Error connecting to mono: ' + err)
 })
 
-app.get('/', (req, res) => {
-  res.send('Hello express')
+app.get('/', requireAuth, (req, res) => {
+  res.send({userId: req.user._id, email: req.user.email})
 })
 
 app.listen(3000, () => {
