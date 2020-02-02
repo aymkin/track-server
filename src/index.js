@@ -1,8 +1,10 @@
 require('./models/User')
+require('./models/Track')
 
 const express = require('express')
 const mongoose = require('mongoose')
 const authRoutes = require('./routes/authRoutes')
+const trackRoutes = require('./routes/trackRouts')
 const mongodb = require('../mongodbSensitive')
 const requireAuth = require('./middlewares/requireAuth')
 
@@ -10,6 +12,7 @@ const app = express()
 
 app.use(express.json())
 app.use(authRoutes)
+app.use(trackRoutes)
 
 const mongoUri = mongodb.uri
 mongoose.connect(mongoUri, {
