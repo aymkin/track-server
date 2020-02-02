@@ -8,8 +8,8 @@ const pointSchema = new mongoose.Schema({
     altitude: Number,
     accuracy: Number,
     heading: Number,
-    speed: Number
-  }
+    speed: Number,
+  },
 })
 
 const trackSchema = new mongoose.Schema({
@@ -19,9 +19,9 @@ const trackSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    default: ''
+    default: '',
   },
-  locations: [pointSchema]
+  locations: [pointSchema],
 })
 
 mongoose.model('Track', trackSchema)
